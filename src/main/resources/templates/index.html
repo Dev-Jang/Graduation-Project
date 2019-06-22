@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+	<head>
+
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<title>Swin</title>
+
+		<!-- Custom fonts for this template-->
+		<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+		<link
+		href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+		rel="stylesheet">
+
+		<!-- Page level plugin CSS-->
+		<link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+
+		<!-- Custom styles for this template-->
+		<link href="css/sb-admin.css" rel="stylesheet">
+
+		<link href="weather-icons-master/css/weather-icons-wind.css" rel="stylesheet" type="text/css">
+		<link href="weather-icons-master/css/weather-icons.css" rel="stylesheet" type="text/css">
+
+	</head>
+
+	<body id="page-top">
+
+		<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+			<a class="navbar-brand mr-1" href="main.html">S w i n</a>
+
+			<button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+				<i class="fas fa-bars"></i>
+			</button>
+
+			<!-- Navbar Search -->
+			<form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"></form>
+
+			<!-- Navbar -->
+			<ul class="navbar-nav ml-auto ml-md-0">
+
+				<li class="nav-item dropdown no-arrow">
+					<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+										  aria-haspopup="true" aria-expanded="false">
+						<i class="fas fa-user-circle fa-fw"></i>
+					</a>
+					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+						<a class="dropdown-item" href="information.html">회원 정보</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">로그아웃</a>
+					</div>
+				</li>
+			</ul>
+
+		</nav>
+
+		<!-- Page Wrapper -->
+		<div id="wrapper">
+
+			<!-- Sidebar -->
+			<ul class="sidebar navbar-nav">
+
+				<!-- Nav Item - Weather -->
+				<li class="nav-item active">
+					<a class="nav-link" href="index.html">
+						<i class="fas fa-fw fa-sun"></i>
+						<span>날씨</span>
+					</a>
+				</li>
+
+				<!-- Nav Item - Main -->
+				<li class="nav-item">
+					<a class="nav-link" href="main.html">
+						<i class="fas fa-fw fa-home"></i>
+						<span>창문 제어</span>
+					</a>
+				</li>
+
+			</ul>
+			<!-- End of Sidebar -->
+
+			<div id="content-wrapper">
+
+				<div class="container-fluid">
+
+					<!-- Breadcrumbs-->
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active">날씨</li>
+					</ol>
+
+					<!-- Area Chart Example-->
+					<div class="card mb-3">
+						<div class="card-header">
+							<i class="fas fa-chart-area"></i>
+	  오늘 날씨</div>
+						<p>
+						<div class="card-body">
+							<div class="text-center">
+								<h1 id="location">City, Country</h1>
+								<h5 id="lat_long">Lat: xx.xxxx, Lon: -xx.xxxx</h5>
+
+							</div>
+
+							<div class="text-center">
+								<br>
+								<!-- 주요 기사에는 날씨 아이콘 및 조건 설명이 포함되어 있습니다. -->
+								<p>
+								<article class="main">
+									<!-- Giant Icon -->
+									<i id="condition_icon" class="wi wi-na fa-10x"></i>
+									<br><br>
+									<!-- 조건 설명 -->
+									<h4 id="condition">XXXX</h4>
+								</article>
+								</p>
+							</div><br><br>
+
+
+							<aside class="aside aside-1">
+
+								<div class="row">
+
+									<div class="col-xl-3 col-md-6 mb-4">
+										<div class="card border shadow h-100 py-2">
+											<div class="card-body">
+												<div class="row no-gutters align-items-center">
+													<div class="col mr-2">
+														<div
+		  class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+															Air temperature (기온)
+														</div>
+														<div class="h5 mb-0 font-weight-bold">
+															<span id="temp">XX&deg;F</span>
+														</div>
+													</div>
+													<div class="col-auto">
+														<i class="icon wi wi-thermometer fa-3x"></i>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-xl-3 col-md-6 mb-4">
+										<div class="card border shadow h-100 py-2">
+											<div class="card-body">
+												<div class="row no-gutters align-items-center">
+													<div class="col mr-2">
+														<div
+															class="text-xs font-weight-bold text-success text-uppercase mb-1">
+															Pressure (기압)</div>
+														<div class="h5 mb-0 font-weight-bold">
+															<span id="pressure">XXXX</span> hPa
+														</div>
+													</div>
+													<div class="col-auto">
+														<i class="icon wi wi-barometer fa-3x"></i>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-xl-3 col-md-6 mb-4">
+										<div class="card border shadow h-100 py-2">
+											<div class="card-body">
+												<div class="row no-gutters align-items-center">
+													<div class="col mr-2">
+														<div
+		  class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+															Humidity (습도)</div>
+														<div class="h5 mb-0 font-weight-bold">
+															<span id="humidity">XX</span>%
+														</div>
+													</div>
+													<div class="col-auto">
+														<i class="icon wi wi-humidity fa-3x"></i>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-xl-3 col-md-6 mb-4">
+										<div class="card border shadow h-100 py-2">
+											<div class="card-body">
+												<div class="row no-gutters align-items-center">
+													<div class="col mr-2">
+														<div
+															class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+															Wind (바람)</div>
+														<div class="h5 mb-0 font-weight-bold">
+															<span id="wind">X.X km/h</span>
+														</div>
+													</div>
+													<div class="col-auto">
+														<i class="icon wi wi-strong-wind fa-3x"></i>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+								<button type="button" class="btn btn-outline-secondary">Show in &deg;<span>F</span></button>
+
+							</aside>
+						</div>
+						</p>
+						<div id="date" class="card-footer small text-muted">Weekday, Month XX 20XX</div>
+					</div>
+
+
+					<!-- Area Chart Example-->
+
+					<div class="card mb-3">
+						<div class="card-header">
+							<i class="fas fa-chart-area"></i>
+							날씨 예보</div>
+						<p>
+						<div class="card-body">
+
+							<div class="row">
+
+								<div class="col-xl-3 col-md-6 mb-4">
+									<div class="card border shadow h-100 py-2">
+										<div class="card-body">
+											<div class="row no-gutters align-items-center">
+												<div class="days-box text-center">
+													<div class="col-xs-3 day-first">
+														<h2 class="day"></h2><br>
+														<p><i class="wi fa-4x"></i></p>
+														<p><span class="d-min-temp text-primary fa-2x"></span>
+														<span class="d-max-temp text-danger fa-2x"></span>
+														</p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-xl-3 col-md-6 mb-4">
+									<div class="card border shadow h-100 py-2">
+										<div class="card-body">
+											<div class="row no-gutters align-items-center">
+												<div class="days-box text-center">
+													<div class="col-xs-3">
+														<h2 class="day"></h2><br>
+														<p><i class="wi fa-4x"></i></p>
+														<p><span class="d-min-temp text-primary fa-2x"></span>
+														<span class="d-max-temp text-danger fa-2x"></span>
+														</p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-xl-3 col-md-6 mb-4">
+									<div class="card border shadow h-100 py-2">
+										<div class="card-body">
+											<div class="row no-gutters align-items-center">
+												<div class="days-box text-center">
+													<div class="col-xs-3">
+														<h2 class="day"></h2><br>
+														<p><i class="wi fa-4x"></i></p>
+														<p><span class="d-min-temp text-primary fa-2x"></span>
+														<span class="d-max-temp text-danger fa-2x"></span>
+														</p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-xl-3 col-md-6 mb-4">
+									<div class="card border shadow h-100 py-2">
+										<div class="card-body">
+											<div class="row no-gutters align-items-center">
+												<div class="days-box text-center">
+													<div class="col-xs-3">
+														<h2 class="day"></h2><br>
+														<p><i class="wi fa-4x"></i></p>
+														<p><span class="d-min-temp text-primary fa-2x"></span>
+														<span class="d-max-temp text-danger fa-2x"></span>
+														</p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+						</p>
+						<div id="updated" class="card-footer small text-muted"></div>
+					</div>
+
+				</div>
+				<!-- /.container-fluid -->
+
+				<!-- Sticky Footer -->
+				<footer class="sticky-footer">
+					<div class="container my-auto">
+						<div class="copyright text-center my-auto">
+							<span>Sungkyul University © Division of Computer Engineering 2014</span>
+						</div>
+					</div>
+				</footer>
+
+			</div>
+			<!-- /.content-wrapper -->
+
+		</div>
+		<!-- /#wrapper -->
+
+		<!-- Scroll to Top Button-->
+		<a class="scroll-to-top rounded" href="#page-top">
+			<i class="fas fa-angle-up"></i>
+		</a>
+
+		<!-- Logout Modal-->
+		<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+						<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<div class="modal-body">종료 할 준비가 되면 아래의 "로그아웃"을 선택하십시오.</div>
+					<div class="modal-footer">
+						<button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
+						<form th:action="@{/logout}" method="post" style="display:inline"><input type="submit"
+							class="btn btn-primary" value="로그아웃"/></form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Bootstrap core JavaScript-->
+		<script src="vendor/jquery/jquery.min.js"></script>
+		<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+		<!-- Core plugin JavaScript-->
+		<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+		<!-- Page level plugin JavaScript-->
+		<script src="vendor/chart.js/Chart.min.js"></script>
+
+		<!-- Custom scripts for all pages-->
+		<script src="js/sb-admin.min.js"></script>
+
+		<!-- Demo scripts for this page-->
+		<script src="js/demo/chart-time-weather-demo.js"></script>
+		<script src="js/demo/chart-week-weather-demo.js"></script>
+
+		<script src="js/weather2.js"></script>
+		<script src="js/weather.js"></script>
+
+	</body>
+
+</html>
