@@ -17,12 +17,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.security.Principal;
 import java.util.UUID;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class UserController {
@@ -79,6 +82,11 @@ public class UserController {
 
 	@RequestMapping("/login.html")
 	public String login() {
+		HttpServletRequest req = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+        	String ip = req.getHeader("X-FORWARDED-FOR");
+        	if (ip == null)
+            		ip = req.getRemoteAddr();
+		System.out.println("> " + nowTime() + ip + ": Try to access");		
 		return "login";
 	}
 
