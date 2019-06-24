@@ -1,7 +1,7 @@
 # Graduation-Project
-My graduation project using Spring boot at Univ.Sungkyul.
+My graduation project with Spring boot at Univ.Sungkyul.
 
-성결대학교 14학번 Window Box 팀
+Window Box Team, 14th year of Univ.Sungkyul.
 김영록(팀장/HW), 장주영(서버&DB), 김주웅(Web)
 
-이 프로젝트는 Smart Window 기기의 제어 및 센서값 수신 등의 기능을 가지고 있습니다.
+This project has functions such as control of Smart-Window device and reception of sensor value.
